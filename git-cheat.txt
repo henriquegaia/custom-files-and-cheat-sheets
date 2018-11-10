@@ -1,0 +1,100 @@
+git branch -d branch_name
+
+git branch --list '*-TEMP'
+
+git br | egrep "STAGING|TEMP" | xargs git br -d
+
+git config credential.helper store
+
+git config credential.helper store
+
+git diff --name-only master <your_branch>
+
+git fsck --full --strict
+
+git for-each-ref --format="%(refname:short) %(upstream:track)" refs/heads | grep ahead
+
+git log --cherry master..<branch_name>
+
+git log --pretty=format:"%h : %an : %ar : %s" --graph
+
+git log --since=10.weeks --stat
+
+git log | grep -b3 ".*bad.*"
+
+git log -- *.js
+
+git log --follow -- ./Spigo/Spigo.Web/DebugLog.txt
+
+git push <remote_name> --delete <branch_name>
+
+git reflog 
+
+git reset --hard <commit>
+
+git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
+
+tree .git -I 'hooks|config|description|info'
+
+-------------------------------------------------------------------------------
+	
+-> search for faulty commit (missing file stuff1.txt)
+
+	git bisect start
+	
+	git bisect good <oldestKnownGoodCommit> 
+	
+	git bisect bad <newestKnownGoodCommit> --> omit commit id if is HEAD 
+	
+	echo [ -e stuff1.txt ] > test.sh --> should not be under source control
+	
+	git bisect run test.sh
+
+-> track new branch created by someonelse
+
+	git fetch
+	
+	git branch <local-name> -t <remote-name>
+
+-> commit details
+
+	git cat-file commit 4d64d22
+
+-> hierarchy of filesystem
+
+	git ls-tree 22694a0
+	
+-> content of a blob
+
+	git cat-file blob e69de29
+
+-> details on most recent commit 
+
+	git cat-file commit HEAD
+	
+-> rename branches
+
+	git branch -m new-name
+	
+	git push origin :old-name new-name
+	
+	git push origin -u new-name
+
+-> create branch behind head 
+
+	git branch feature HEAD^ <-- 1
+
+	git branch feature HEAD~5 <-- 5
+
+	git branch feature 5h3hd84 <-- to a commit 
+
+-> recover from a bad 'git reset --hard'
+	
+	git reflog 
+	
+	git reset --hard HEAD@{1} <-- place head where it was before the reset
+
+-> undo last commit but keep changes staged
+	
+	git reset @~1
+
